@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oojunzi.test.dao.UserDao">
+
+    <resultMap id="BASE_RESULT_MAP" type="com.oojunzi.test.model.User">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="inviter_uid" jdbcType="INTEGER" property="inviterUid"/>
+        <result column="user_type" jdbcType="INTEGER" property="userType"/>
+        <result column="reg_ip" jdbcType="VARCHAR" property="regIp"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="union_id" jdbcType="VARCHAR" property="unionId"/>
+        <result column="open_id" jdbcType="VARCHAR" property="openId"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="sex" jdbcType="TINYINT" property="sex"/>
+        <result column="subscribe" jdbcType="TINYINT" property="subscribe"/>
+        <result column="language" jdbcType="VARCHAR" property="language"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="subscribe_time" jdbcType="TIMESTAMP" property="subscribeTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="group_id" jdbcType="INTEGER" property="groupId"/>
+        <result column="tag_ids" jdbcType="VARCHAR" property="tagIds"/>
+        <result column="channel" jdbcType="VARCHAR" property="channel"/>
+        <result column="access_token" jdbcType="VARCHAR" property="accessToken"/>
+        <result column="refresh_token" jdbcType="VARCHAR" property="refreshToken"/>
+        <result column="last_refresh_time" jdbcType="TIMESTAMP" property="lastRefreshTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <sql id="COLUMN_LIST">
+    id, `name`, mobile, inviter_uid, user_type, reg_ip, status, avatar, union_id, open_id, nickname, sex, subscribe, `language`, city, province, country, subscribe_time, remark, group_id, tag_ids, access_token, refresh_token, last_refresh_time, create_time, update_time
+    </sql>
+
+    <insert id="insert" parameterType="com.oojunzi.test.model.User">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert ignore into tb_user (
+        `name`,
+        mobile,
+        inviter_uid,
+        user_type,
+        reg_ip,
+        status,
+        avatar,
+        union_id,
+        open_id,
+        nickname,
+        sex,
+        subscribe,
+        `language`,
+        city,
+        province,
+        country,
+        subscribe_time,
+        remark,group_id,
+        tag_ids,
+        channel,
+        access_token,
+        refresh_token,
+        last_refresh_time,
+        create_time,
+        update_time
+        )
+        values (
+        #{name,jdbcType=VARCHAR},
+        #{mobile,jdbcType=VARCHAR},
+        #{inviterUid,jdbcType=INTEGER},
+        #{userType,jdbcType=INTEGER},
+        #{regIp,jdbcType=VARCHAR},
+        #{status,jdbcType=TINYINT},
+        #{avatar,jdbcType=VARCHAR},
+        #{unionId,jdbcType=VARCHAR},
+        #{openId,jdbcType=VARCHAR},
+        #{nickname,jdbcType=VARCHAR},
+        #{sex,jdbcType=TINYINT},
+        #{subscribe,jdbcType=TINYINT},
+        #{language,jdbcType=VARCHAR},
+        #{city,jdbcType=VARCHAR},
+        #{province,jdbcType=VARCHAR},
+        #{country,jdbcType=VARCHAR},
+        #{subscribeTime,jdbcType=TIMESTAMP},
+        #{remark,jdbcType=VARCHAR},
+        #{groupId,jdbcType=INTEGER},
+        #{tagIds,jdbcType=VARCHAR},
+        #{channel,jdbcType=VARCHAR},
+        #{accessToken,jdbcType=VARCHAR},
+        #{refreshToken,jdbcType=VARCHAR},
+        #{lastRefreshTime,jdbcType=TIMESTAMP},
+        #{createTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <update id="updateByUid" parameterType="com.oojunzi.test.model.User">
+        update tb_user
+        set
+        `name` = #{name,jdbcType=VARCHAR},
+        mobile = #{mobile,jdbcType=VARCHAR},
+        inviter_uid = #{inviterUid,jdbcType=INTEGER},
+        user_type = #{userType,jdbcType=INTEGER},
+        reg_ip = #{regIp,jdbcType=VARCHAR},
+        status = #{status,jdbcType=TINYINT},
+        avatar = #{avatar,jdbcType=VARCHAR},
+        union_id = #{unionId,jdbcType=VARCHAR},
+        open_id = #{openId,jdbcType=VARCHAR},
+        nickname = #{nickname,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=TINYINT},
+        subscribe = #{subscribe,jdbcType=TINYINT},
+        `language` = #{language,jdbcType=VARCHAR},
+        city = #{city,jdbcType=VARCHAR},
+        province = #{province,jdbcType=VARCHAR},
+        country = #{country,jdbcType=VARCHAR},
+        subscribe_time = #{subscribeTime,jdbcType=TIMESTAMP},
+        remark = #{remark,jdbcType=VARCHAR},
+        group_id = #{groupId,jdbcType=INTEGER},
+        tag_ids = #{tagIds,jdbcType=VARCHAR},
+        channel = #{channel,jdbcType=VARCHAR},
+        access_token = #{accessToken,jdbcType=VARCHAR},
+        refresh_token = #{refreshToken,jdbcType=VARCHAR},
+        last_refresh_time = #{lastRefreshTime,jdbcType=TIMESTAMP}
+        where `id` = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="findByUid" parameterType="java.lang.Integer" resultMap="BASE_RESULT_MAP">
+        select
+        <include refid="COLUMN_LIST"/>
+        from tb_user
+        where id = #{uid,jdbcType=INTEGER}
+    </select>
+
+    <select id="findByOpenId" parameterType="java.lang.String" resultMap="BASE_RESULT_MAP">
+        select
+        <include refid="COLUMN_LIST"/>
+        from tb_user
+        where open_id = #{openId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findByMobile" parameterType="java.lang.String" resultMap="BASE_RESULT_MAP">
+        select
+        <include refid="COLUMN_LIST"/>
+        from tb_user
+        where mobile = #{mobile,jdbcType=VARCHAR}
+    </select>
+    <select id="countUser" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(1)
+        from tb_user
+        where `status` = #{status,jdbcType=TINYINT}
+    </select>
+
+    <select id="selectUserList" resultMap="BASE_RESULT_MAP" parameterType="java.util.Map">
+        select
+        <include refid="COLUMN_LIST"/>
+        from tb_user
+        where status = #{status,jdbcType=TINYINT}
+        limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+    </select>
+
+    <select id="countByUserType" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(1) from tb_user where `user_type` = #{userType,jdbcType=TINYINT} and `status` = 3;
+    </select>
+
+    <select id="selectUserListByUserType" resultMap="BASE_RESULT_MAP" parameterType="java.util.Map">
+        select
+        <include refid="COLUMN_LIST"/>
+        from tb_user
+        where user_type = #{userType,jdbcType=INTEGER} and `status` = 3
+        limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+    </select>
+
+    <select id="findByUidList" resultMap="BASE_RESULT_MAP" parameterType="java.util.List">
+        select
+        <include refid="COLUMN_LIST"/>
+        from tb_user
+        where id in
+        <foreach collection="list" item="uid" open="(" separator="," close=")">
+            #{uid, jdbcType=INTEGER}
+        </foreach>
+         order by update_time desc
+    </select>
+     <select id="getUserListByWithdrawStatus" resultMap="BASE_RESULT_MAP" parameterType="java.util.Map">
+        select
+        	tb.*
+     	<if test="_parameter.get('withdrawStatus')==0">
+	        from tb_user tb left join tb_withdraw tw on tb.id=tw.uid where tb.status=3 and tb.user_type=1 and tw.status=0 and tw.type=1
+     	</if>
+     	<if test="_parameter.get('withdrawStatus')==1">
+	        from tb_user tb  where tb.status=3 and tb.user_type=1  and tb.id not in (SELECT tb.id from tb_user tb right join tb_withdraw tw on tb.id=tw.uid where tb.status=3 and tb.user_type=1 and tw.status=0 and tw.type=1 )
+     	</if>
+	        limit #{offset,jdbcType=INTEGER}, #{limit,jdbcType=INTEGER}
+    </select>
+     <select id="countByPresidentWithdrawStatus" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+       select count(1) from tb_user tb 
+       <if test="_parameter==0">
+       		left join tb_withdraw tw on tb.id=tw.uid where tb.status=3 and tb.user_type=1 and tw.status=0 and tw.type=1
+     	</if>
+     	<if test="_parameter==1">
+     		where tb.status=3 and tb.user_type=1  and tb.id not in (SELECT tb.id from tb_user tb right join tb_withdraw tw on tb.id=tw.uid where tb.status=3 and tb.user_type=1 and tw.status=0 and tw.type=1 )
+     	</if>
+    </select>
+    <!-- 根据手机号模糊查询用户名 -->
+     <select id="findLikeDataByMobile" parameterType="java.lang.String" resultType="java.util.HashMap">
+        select id,name,mobile,user_type,avatar from tb_user u
+        where status=3 and u.mobile like concat(#{mobile,jdbcType=VARCHAR},'%')
+        limit 0,20
+    </select>
+     <!-- 查询距离指定日期注册人数 -->
+     <select id="countRegUsersByDate" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1)  FROM tb_user WHERE  `status` != 1  
+		<if test="_parameter !=null and _parameter!=''">
+	   		<![CDATA[ and UNIX_TIMESTAMP(create_time)>= UNIX_TIMESTAMP(#{beginDate,jdbcType=VARCHAR})  ]]>
+		</if> 
+    </select>
+    <select id="getTenUser" resultType="java.util.Map">
+    	SELECT `name` FROM tb_user WHERE `status` != 1 ORDER BY create_time DESC LIMIT 1,10 
+    </select>
+    
+    
+    <select id="countByInviterUid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(1) from tb_user where inviter_uid = #{uid,jdbcType=INTEGER} and `status`=3
+    </select>
+
+    <select id="findByInviterUid" parameterType="java.lang.Integer" resultMap="BASE_RESULT_MAP">
+        select
+        <include refid="COLUMN_LIST"/>
+        from tb_user
+        where
+        `status`=3 
+        <if test="uid!=0">
+        and inviter_uid = #{uid,jdbcType=INTEGER}
+        </if>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+    </select>
+    
+</mapper>

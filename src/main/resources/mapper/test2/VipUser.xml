@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 不使用namespace的话sql搜索定位会比较方便 -->
+<mapper namespace="com.oojunzi.test.dao1.VipUserMapper">
+	<sql id="Base_Column_List">
+		u_id,noid,email,address,id_card,jobs,education,marriage,phone,children,wxid,openid,nick_name,real_name,sex,ischek,credit,password,balance,award,createdate,updatedate
+	</sql>
+	<sql id="Base_Column_insert">
+		#{u_id,jdbcType=INTEGER},
+		#{noid,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR},
+		#{address,jdbcType=VARCHAR},
+		#{id_card,jdbcType=VARCHAR},
+		#{jobs,jdbcType=VARCHAR},
+		#{education,jdbcType=VARCHAR},
+		#{marriage,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR},
+		#{children,jdbcType=INTEGER},
+		#{wxid,jdbcType=VARCHAR},
+		#{openid,jdbcType=VARCHAR},
+		#{nick_name,jdbcType=VARCHAR},
+		#{real_name,jdbcType=VARCHAR},
+		#{sex,jdbcType=VARCHAR},
+		#{ischek,jdbcType=VARCHAR},
+		#{credit,jdbcType=INTEGER},
+		#{password,jdbcType=VARCHAR},
+		#{balance,jdbcType=DOUBLE},
+		#{award,jdbcType=DOUBLE},
+		#{createdate,jdbcType=TIMESTAMP},
+		#{updatedate,jdbcType=TIMESTAMP}
+	</sql>
+	<sql id="Base_query_column">
+		u_id,noid,email,address,id_card,jobs,education,marriage,phone,children,wxid,openid,nick_name,real_name,sex,ischek,credit,password,balance,award,createdate,updatedate
+	</sql>
+	<sql id="Base_query_where">
+		<if test="noid != null and noid != ''">
+			and noid = #{noid}
+		</if>
+		<if test="email != null and email != ''">
+			and email = #{email}
+		</if>
+		<if test="address != null and address != ''">
+			and address = #{address}
+		</if>
+		<if test="id_card != null and id_card != ''">
+			and id_card = #{id_card}
+		</if>
+		<if test="jobs != null and jobs != ''">
+			and jobs = #{jobs}
+		</if>
+		<if test="education != null and education != ''">
+			and education = #{education}
+		</if>
+		<if test="marriage != null and marriage != ''">
+			and marriage = #{marriage}
+		</if>
+		<if test="phone != null and phone != ''">
+			and phone = #{phone}
+		</if>
+		<if test="children != null and children != ''">
+			and children = #{children}
+		</if>
+		<if test="wxid != null and wxid != ''">
+			and wxid = #{wxid}
+		</if>
+		<if test="openid != null and openid != ''">
+			and openid = #{openid}
+		</if>
+		<if test="nick_name != null and nick_name != ''">
+			and nick_name = #{nick_name}
+		</if>
+		<if test="real_name != null and real_name != ''">
+			and real_name = #{real_name}
+		</if>
+		<if test="sex != null and sex != '' and sex!=0">
+			and sex = #{sex}
+		</if>
+		<if test="ischek != null and ischek != ''">
+			and ischek = #{ischek}
+		</if>
+		<if test="credit != null and credit != ''">
+			and credit = #{credit}
+		</if>
+		<if test="password != null and password != ''">
+			and password = #{password}
+		</if>
+		<if test="balance != null and balance != ''">
+			and balance = #{balance}
+		</if>
+		<if test="award != null and award != ''">
+			and award = #{award}
+		</if>
+		<if test="createdate != null and createdate != ''">
+			and createdate = #{createdate}
+		</if>
+		<if test="updatedate != null and updatedate != ''">
+			and updatedate = #{updatedate}
+		</if>
+
+		<if test="minMoney != null and minMoney != ''">
+			<![CDATA[ and minMoney >= {minMoney} ]]>
+		</if>
+		<if test="maxMoney != null and maxMoney != ''">
+			<![CDATA[ and maxMoney <= {maxMoney} ]]>
+		</if>
+		<if test="joinBeginDate != null and joinBeginDate != ''">
+			<![CDATA[ and joinBeginDate >= {joinBeginDate} ]]>
+		</if>
+		<if test="joinEndDate != null and joinEndDate != ''">
+			<![CDATA[ and joinEndDate <= {joinEndDate} ]]>
+		</if>
+
+	</sql>
+
+	<insert id="save" parameterType="com.oojunzi.test.model1.VipUser"
+		keyProperty="id">
+		INSERT INTO vip_user (
+		<include refid="Base_Column_List" />
+		) VALUES (
+		<include refid="Base_Column_insert" />
+		)
+	</insert>
+
+
+	<update id="update" parameterType="com.oojunzi.test.model1.VipUser"
+		flushCache="true">
+		UPDATE vip_user
+		<set>
+			<if test=" noid!= null  and noid != ''">
+				noid = #{noid,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" email!= null  and email != ''">
+				email = #{email,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" address!= null  and address != ''">
+				address = #{address,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" id_card!= null  and id_card != ''">
+				id_card = #{id_card,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" jobs!= null  and jobs != ''">
+				jobs = #{jobs,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" education!= null  and education != ''">
+				education = #{education,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" marriage!= null  and marriage != ''">
+				marriage = #{marriage,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" phone!= null  and phone != ''">
+				phone = #{phone,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" children!= null  and children != ''">
+				children = #{children,jdbcType=INTEGER} ,
+			</if>
+			<if test=" wxid!= null  and wxid != ''">
+				wxid = #{wxid,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" openid!= null  and openid != ''">
+				openid = #{openid,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" nick_name!= null  and nick_name != ''">
+				nick_name = #{nick_name,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" real_name!= null  and real_name != ''">
+				real_name = #{real_name,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" sex!= null  and sex != ''">
+				sex = #{sex,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" ischek!= null  and ischek != ''">
+				ischek = #{ischek,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" credit!= null  and credit != ''">
+				credit = #{credit,jdbcType=INTEGER} ,
+			</if>
+			<if test=" password!= null  and password != ''">
+				password = #{password,jdbcType=VARCHAR} ,
+			</if>
+			<if test=" balance!= null  and balance != ''">
+				balance = #{balance,jdbcType=DOUBLE} ,
+			</if>
+			<if test=" award!= null  and award != ''">
+				award = #{award,jdbcType=DOUBLE} ,
+			</if>
+			<if test=" createdate!= null  and createdate != ''">
+				createdate = #{createdate,jdbcType=TIMESTAMP} ,
+			</if>
+			<if test=" updatedate!= null  and updatedate != ''">
+				updatedate = #{updatedate,jdbcType=TIMESTAMP}
+			</if>
+		</set>
+		WHERE
+		u_id = #{u_id,jdbcType=INTEGER}
+	</update>
+
+	<!-- <select id="getVipUser" parameterType="int" resultMap="vipCarResultMap1"> 
+		select * from vip_user u left join vip_car c on u.u_id = c.user_id where 
+		u.u_id = #{u_id} </select> <resultMap type="com.oojunzi.test.model1.VipUser" 
+		id="vipCarResultMap1"> <id property="u_id" column="u_id" /> <collection property="vipCarList" 
+		ofType="com.oojunzi.mybatis.entity.VipCar" > </collection> </resultMap> -->
+
+	<select id="getVipUserById" parameterType="int" resultMap="vipCarResultMap1">
+		select * from vip_user where u_id = #{u_id}
+	</select>
+
+	<resultMap type="com.oojunzi.test.model1.VipUser" id="vipCarResultMap1">
+		<id property="u_id" column="u_id" />
+		<collection property="vipCarList" ofType="com.oojunzi.mybatis.entity.VipCar"
+			select="com.oojunzi.mybatis.dao.VipCarMapper.getVipCarListByUserId"
+			column="u_id">
+		</collection>
+	</resultMap>
+
+	<delete id="delete" parameterType="string">
+		delete from vip_user where
+		u_id=#{u_id}
+	</delete>
+
+
+	<select id="getVipUserByParas" resultType="com.oojunzi.test.model1.VipUser"
+		parameterType="com.oojunzi.test.model1.VipUser">
+		select
+		<include refid="Base_query_column" />
+		from vip_user where 1=1
+		<include refid="Base_query_where" />
+	</select>
+
+	<select id="getVipUsersByParasNoPage" resultType="com.oojunzi.test.model1.VipUser"
+		parameterType="com.oojunzi.test.model1.VipUser">
+		select
+		<include refid="Base_query_column" />
+		from vip_user where 1=1
+		<include refid="Base_query_where" />
+	</select>
+
+	<select id="getVipCarListByRelevance" parameterType="com.oojunzi.test.model1.VipUser"
+		resultType="com.oojunzi.test.model1.VipUser">
+		select * from vip_user where 1=1
+		<if test="real_name != null and real_name != ''">
+			and real_name like #{real_name}
+		</if>
+		<if test="nick_name != null and nick_name != ''">
+			and nick_name like #{nick_name}
+		</if>
+		<if test="phone != null and phone != ''">
+			and phone like #{phone}
+		</if>
+		<if test="minMoney != null and minMoney != ''">
+			<![CDATA[ and blance >= #{minMoney} ]]>
+		</if>
+		<if test="maxMoney != null and maxMoney != ''">
+			<![CDATA[ and blance <= #{maxMoney} ]]>
+		</if>
+		<if test="joinBeginDate != null and joinBeginDate != ''">
+			<![CDATA[ and createdate >= #{joinBeginDate} ]]>
+		</if>
+		<if test="joinEndDate != null and joinEndDate != ''">
+			<![CDATA[ and createdate <= #{joinEndDate} ]]>
+		</if>
+	</select>
+</mapper>
